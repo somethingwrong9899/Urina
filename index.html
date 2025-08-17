@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AstrumBit — обмен криптовалют за секунды: прозрачные курсы, удобный интерфейс." />
+  <meta name="theme-color" content="#0b0f1a" />
+  <title>AstrumBit — neon crypto swap</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Пропустить к содержимому</a>
+  <a id="top" class="sr-only">top</a>
+
+  <!-- Header -->
+  <header id="siteHeader" class="elevate-on-scroll">
+    <div class="container nav">
+      <a href="#top" class="brand" id="brandHome" title="Домой (обновить)">
+        <span class="brand-logo glint" aria-hidden="true"></span>
+        <span>AstrumBit</span>
+      </a>
+      <nav class="nav-links" aria-label="Главное меню">
+        <a href="#about">О нас</a>
+        <a href="#topTokens">Токены</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn secondary" id="themeToggle" aria-pressed="false" title="Сменить тему">🌓</button>
+        <a class="btn secondary" href="#signup">Регистрация</a>
+        <a class="btn" href="#signin">Вход</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container grid grid-2">
+        <div class="left">
+          <div class="tag">Реальные (демо) курсы</div>
+          <h1 class="title-xl neon-title">AstrumBit — обмен крипто за секунды</h1>
+          <p class="subtitle">Прозрачные курсы. Чистый UI. 24/7 поддержка.</p>
+          <div class="btn-row">
+            <a class="btn" href="#converter">Начать</a>
+            <a class="btn ghost" href="#about">Узнать больше</a>
+          </div>
+          <p class="muted footnote">Все расчёты носят ознакомительный характер; реальные условия зависят от сети и рынка.</p>
+        </div>
+        <div class="right">
+          <div id="converter" class="card converter" aria-label="Калькулятор обмена">
+            <div class="grid" style="gap:12px;">
+              <!-- FROM row -->
+              <div class="amount-row">
+                <button id="fromPicker" class="picker amount-left" data-open-token="from" aria-haspopup="dialog">
+                  <span class="logo" aria-hidden="true"></span>
+                  <span class="picker-meta">
+                    <strong class="picker-sym">BTC</strong>
+                    <span class="muted picker-name">Bitcoin</span>
+                  </span>
+                  <span class="picker-price" data-symbol="BTC">$—</span>
+                </button>
+                <div class="amount-field">
+                  <label for="fromAmount" class="muted">Отдаю</label>
+                  <input id="fromAmount" class="input amount" type="text" placeholder="0.00" inputmode="decimal" autocomplete="off" />
+                </div>
+              </div>
+
+              <!-- Switch -->
+              <div class="switcher">
+                <button class="btn secondary" id="btnSwap" title="Поменять местами" aria-label="Поменять местами">⇅</button>
+              </div>
+
+              <!-- TO row -->
+              <div class="amount-row">
+                <button id="toPicker" class="picker amount-left" data-open-token="to" aria-haspopup="dialog">
+                  <span class="logo" aria-hidden="true"></span>
+                  <span class="picker-meta">
+                    <strong class="picker-sym">USDT</strong>
+                    <span class="muted picker-name">Tether</span>
+                  </span>
+                  <span class="picker-price" data-symbol="USDT">$—</span>
+                </button>
+                <div class="amount-field">
+                  <label for="toAmount" class="muted">Получаю</label>
+                  <input id="toAmount" class="input amount" type="text" placeholder="0.00" inputmode="decimal" autocomplete="off" />
+                </div>
+              </div>
+
+              <input id="fromAsset" type="hidden" value="BTC" />
+              <input id="toAsset" type="hidden" value="USDT" />
+
+              <!-- Rate line -->
+              <div class="rate-line" aria-live="polite">
+                <span id="rateLabel">Текущий курс</span>
+                <strong id="rate">—</strong>
+              </div>
+
+              <div class="row compact">
+                <button class="btn" id="btnCalc">Рассчитать</button>
+                <button class="btn secondary" id="btnConnect">Подключить кошелёк</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">О нас</h2>
+          <div class="carousel controls">
+            <button class="btn secondary" data-prev="#aboutTrack" aria-controls="aboutTrack" aria-label="Назад">◀</button>
+            <button class="btn secondary" data-next="#aboutTrack" aria-controls="aboutTrack" aria-label="Вперёд">▶</button>
+          </div>
+        </div>
+        <div class="carousel">
+          <div class="track" id="aboutTrack" tabindex="0">
+            <article class="card slide p-16"><h3>Прозрачные курсы</h3><p class="muted">Видно реальный курс до подтверждения.</p></article>
+            <article class="card slide p-16"><h3>Мгновенные расчёты</h3><p class="muted">Обновление цен в реальном времени.</p></article>
+            <article class="card slide p-16"><h3>Поддержка 24/7</h3><p class="muted">Быстрые ответы на вопросы.</p></article>
+            <article class="card slide p-16"><h3>Безопасность</h3><p class="muted">Шифрование и контроль активности.</p></article>
+            <article class="card slide p-16"><h3>Удобный интерфейс</h3><p class="muted">Понятно на десктопе и мобиле.</p></article>
+            <article class="card slide p-16"><h3>Мультсеть</h3><p class="muted">Популярные L1/L2 и стандарты токенов.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Tokens -->
+    <section id="topTokens">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Популярные токены</h2>
+          <div class="carousel controls">
+            <button class="btn secondary" data-prev="#tokenTrack" aria-controls="tokenTrack" aria-label="Назад">◀</button>
+            <button class="btn secondary" data-next="#tokenTrack" aria-controls="tokenTrack" aria-label="Вперёд">▶</button>
+          </div>
+        </div>
+        <div class="carousel">
+          <div class="track" id="tokenTrack" tabindex="0">
+            <article class="card slide token"><div class="row">
+              <div class="id"><div class="avatar logo" data-symbol="BTC"></div><div><div class="sym">BTC</div><div class="muted alias">Bitcoin</div></div></div>
+              <div class="px"><div class="price" data-symbol="BTC">$—</div><div class="pct up" data-change="BTC">+0.0%</div></div>
+            </div><button class="btn secondary" data-select-token="BTC">Выбрать</button></article>
+            <article class="card slide token"><div class="row">
+              <div class="id"><div class="avatar logo" data-symbol="ETH"></div><div><div class="sym">ETH</div><div class="muted alias">Ethereum</div></div></div>
+              <div class="px"><div class="price" data-symbol="ETH">$—</div><div class="pct down" data-change="ETH">-0.0%</div></div>
+            </div><button class="btn secondary" data-select-token="ETH">Выбрать</button></article>
+            <article class="card slide token"><div class="row">
+              <div class="id"><div class="avatar logo" data-symbol="USDT"></div><div><div class="sym">USDT</div><div class="muted alias">Tether</div></div></div>
+              <div class="px"><div class="price" data-symbol="USDT">$—</div><div class="pct up" data-change="USDT">+0.0%</div></div>
+            </div><button class="btn secondary" data-select-token="USDT">Выбрать</button></article>
+            <article class="card slide token"><div class="row">
+              <div class="id"><div class="avatar logo" data-symbol="SOL"></div><div><div class="sym">SOL</div><div class="muted alias">Solana</div></div></div>
+              <div class="px"><div class="price" data-symbol="SOL">$—</div><div class="pct up" data-change="SOL">+0.0%</div></div>
+            </div><button class="btn secondary" data-select-token="SOL">Выбрать</button></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="spacer"></div>
+        <div class="grid" style="gap:12px;">
+          <details><summary>Как работает AstrumBit?</summary><div class="muted">Выбираете активы, вводите сумму и видите курс до подтверждения.</div></details>
+          <details><summary>Какие комиссии?</summary><div class="muted">Комиссии и спред показаны до расчёта; скрытых платежей нет.</div></details>
+          <details><summary>Нужна ли регистрация?</summary><div class="muted">Можно как гостю. Аккаунт открывает доступ к расширенным возможностям.</div></details>
+          <details><summary>Какие сети поддерживаются?</summary><div class="muted">Популярные L1/L2. Список со временем обновляется.</div></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contacts">
+    <div class="container grid" style="gap:8px;">
+      <div>
+        <strong>Контакты</strong>
+        <div class="muted">support@astrumbit.example</div>
+        <div class="muted">Telegram / Discord</div>
+      </div>
+      <div style="margin-top:8px;">
+        <a class="muted" href="#about">О нас</a> ·
+        <a class="muted" href="#faq">FAQ</a> ·
+        <a class="muted" href="#contacts">Контакты</a> ·
+        <a class="muted" href="#terms">Условия</a> ·
+        <a class="muted" href="#privacy">Конфиденциальность</a>
+      </div>
+      <div style="margin-top:8px;" class="muted">© <span id="year"></span> AstrumBit</div>
+    </div>
+  </footer>
+
+  <!-- Support Dialog -->
+  <button class="btn support-fab" id="supportFab" aria-haspopup="dialog" aria-controls="supportDialog">Поддержка</button>
+  <dialog id="supportDialog" aria-label="Связаться с поддержкой">
+    <form method="dialog" class="dialog-card">
+      <h3>Связаться с поддержкой</h3>
+      <p class="muted">Ответим в ближайшее время.</p>
+      <label class="sr-only" for="supportMsg">Сообщение</label>
+      <textarea id="supportMsg" class="input" rows="4" placeholder="Опишите вопрос…"></textarea>
+      <div class="btn-row end">
+        <button class="btn secondary" value="cancel">Отмена</button>
+        <button class="btn" value="send">Отправить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Token Picker Dialog -->
+  <dialog id="tokenDialog" aria-label="Выбор токена">
+    <div class="dialog-card token-dialog" role="dialog" aria-modal="true">
+      <div class="token-dialog-head">
+        <h3>Выберите токен</h3>
+        <button class="btn secondary" id="tokenDialogClose">✕</button>
+      </div>
+      <div class="token-search">
+        <input id="tokenSearch" class="input" placeholder="Поиск: символ, название…" />
+      </div>
+      <div class="token-list" id="tokenList" role="listbox" aria-label="Список токенов"></div>
+    </div>
+  </dialog>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
