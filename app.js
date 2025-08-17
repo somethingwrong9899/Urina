@@ -15,9 +15,28 @@
   const tokenDialog = document.getElementById('tokenDialog');
   const tokenDialogClose = document.getElementById('tokenDialogClose');
   const tokenSearch = document.getElementById('tokenSearch');
-  const tokenList = document.getElementById('tokenList');
-  const btnSwap = document.getElementById('btnSwap');
-  const btnCalc = document.getElementById('btnCalc');
+    const tokenList = document.getElementById('tokenList');
+    const btnSwap = document.getElementById('btnSwap');
+    const btnCalc = document.getElementById('btnCalc');
+
+    // Carousels
+    document.querySelectorAll('.carousel').forEach(c => {
+      const track = c.querySelector('.track');
+      const prev = c.querySelector('[data-prev]');
+      const next = c.querySelector('[data-next]');
+      const update = () => {
+        if(!track) return;
+        prev?.toggleAttribute('disabled', track.scrollLeft <= 0);
+        next?.toggleAttribute('disabled', track.scrollLeft >= track.scrollWidth - track.clientWidth - 1);
+      };
+      prev?.addEventListener('click', () => track.scrollBy({left:-track.clientWidth, behavior:'smooth'}));
+      next?.addEventListener('click', () => track.scrollBy({left: track.clientWidth, behavior:'smooth'}));
+      track?.addEventListener('scroll', update, {passive:true});
+      update();
+    });
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.track').forEach(t => t.dispatchEvent(new Event('scroll')));
+    });
 
   // Utils
   const money = (n) => isFinite(n) ? '$' + Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 }) : '—';
@@ -125,7 +144,13 @@
     }
     // infinite scroll anchor
     let anchor = document.getElementById('token-scroll-anchor');
-    if(!anchor){ anchor=document.createElement('div'); anchor.id='token-scroll-anchor'; anchor.style.height='1px'; tokenDialog.querySelector('.token-dialog').appendChild(anchor); observer.observe(anchor); }
+    if(!anchor){
+      anchor = document.createElement('div');
+      anchor.id = 'token-scroll-anchor';
+      anchor.style.height = '1px';
+      tokenList.appendChild(anchor);
+      observer.observe(anchor);
+    }
   }
 
   // Set token to picker
@@ -198,9 +223,11 @@
   btnCalc.addEventListener('click', ()=>{ rateLabel.textContent='Зафиксированный курс (демо)'; updateRate(); });
 
   // Infinite scroll
-  const observer = new IntersectionObserver(async ([e])=>{
-    if(e.isIntersecting && (tokenSearch.value||'').trim()===''){ page+=1; await loadPage(page); }
-  }, { root: tokenDialog.querySelector('.token-dialog'), threshold: 1 });
+  const observer = new IntersectionObserver(async ([e]) => {
+    if (e.isIntersecting && tokenSearch.value.trim()==='') {
+      page += 1; await loadPage(page);
+    }
+  }, { root: tokenList, threshold: 0.8 });
 
   // Prices refresh
   async function refreshTopPage(){
